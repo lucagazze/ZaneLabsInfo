@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Referencias & Estrategia — ZaneLabs Women's Creatine</title>
+<style>
+  :root {
+    --bg: #0a0f0d;
+    --bg2: #111a16;
+    --bg3: #182218;
+    --mint: #ade3c3;
+    --magenta: #bf0767;
+    --dark-green: #254439;
+    --accent: #ade3c3;
+    --accent2: #bf0767;
+    --accent3: #4ade80;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --border: #1a2e22;
+    --win: #10b981;
+    --lose: #ef4444;
+    --warn: #f59e0b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+  .hero {
+    background: linear-gradient(135deg, #0d2a1a 0%, #0a1a12 50%, #0a0f0d 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 40px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(173,227,195,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 200px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(191,7,103,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ade3c3, #4ade80, #bf0767);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .hero p { color: #94a3b8; font-size: 15px; }
+  .hero .meta { margin-top: 16px; display: flex; gap: 16px; flex-wrap: wrap; }
+  .tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+  }
+  .tag-mint { background: rgba(173,227,195,0.15); color: #ade3c3; border: 1px solid rgba(173,227,195,0.3); }
+  .tag-magenta { background: rgba(191,7,103,0.15); color: #f472b6; border: 1px solid rgba(191,7,103,0.3); }
+  .tag-green { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+  .tag-warn { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+  .tag-blue { background: rgba(129,140,248,0.15); color: #818cf8; border: 1px solid rgba(129,140,248,0.3); }
+
+  nav {
+    background: var(--bg2); border-bottom: 1px solid var(--border);
+    padding: 0 40px; display: flex; gap: 4px;
+    overflow-x: auto; scrollbar-width: none;
+    position: sticky; top: 0; z-index: 100;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav a {
+    color: var(--muted); text-decoration: none;
+    padding: 14px 16px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.4px; white-space: nowrap;
+    border-bottom: 2px solid transparent; transition: all 0.2s;
+  }
+  nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
+
+  .container { max-width: 1400px; margin: 0 auto; padding: 40px; }
+  section { margin-bottom: 60px; }
+  .section-title {
+    font-size: 20px; font-weight: 700; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-title span { font-size: 22px; }
+  .section-sub { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+
+  .card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(173,227,195,0.3); }
+  .card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .card p { font-size: 13px; color: #94a3b8; line-height: 1.6; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+
+  @media (max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .container { padding: 20px; }
+  }
+
+  .stat-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; text-align: center;
+  }
+  .stat-number { font-size: 36px; font-weight: 800; color: var(--mint); line-height: 1; }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  .insight-box {
+    background: var(--bg3); border-left: 3px solid var(--mint);
+    border-radius: 0 10px 10px 0; padding: 14px 16px;
+    margin-bottom: 12px; font-size: 13px; color: #cbd5e1; line-height: 1.6;
+  }
+  .insight-box.magenta { border-left-color: var(--magenta); }
+  .insight-box.warn { border-left-color: var(--warn); }
+  .insight-box.red { border-left-color: var(--lose); }
+
+  /* Ring sections */
+  .ring-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 20px; padding: 16px 20px;
+    border-radius: 12px; border: 1px solid var(--border);
+  }
+  .ring-badge {
+    width: 52px; height: 52px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 900; flex-shrink: 0;
+    color: white; letter-spacing: -1px;
+  }
+  .r1 { background: #1877f2; }
+  .r2 { background: #f5c518; color: #111; }
+  .r3 { background: #333; border: 2px solid #fff; }
+  .r4 { background: #22c55e; }
+  .r5 { background: #ef4444; }
+  .ring-info h2 { font-size: 18px; font-weight: 800; }
+  .ring-info p { font-size: 13px; color: #94a3b8; margin-top: 2px; }
+
+  /* Hook cards */
+  .hook-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px; transition: border-color 0.2s;
+  }
+  .hook-card:hover { border-color: rgba(173,227,195,0.4); transform: translateY(-1px); }
+  .hook-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 8px; opacity: 0.6;
+  }
+  .hook-text {
+    font-size: 14px; font-weight: 600; color: #f1f5f9; line-height: 1.4;
+    font-style: italic;
+  }
+  .hook-note { font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+  /* Competitor cards */
+  .competitor-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .competitor-header {
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .competitor-name { font-size: 16px; font-weight: 700; }
+  .competitor-body { padding: 16px 20px; }
+  .competitor-body p { font-size: 13px; color: #94a3b8; margin-bottom: 8px; }
+  .competitor-body ul { list-style: none; }
+  .competitor-body li { font-size: 13px; color: #94a3b8; padding: 4px 0; padding-left: 16px; position: relative; }
+  .competitor-body li::before { content: '→'; position: absolute; left: 0; color: var(--mint); }
+
+  /* NC levels */
+  .nc-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+  }
+  .nc-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 8px;
+    font-size: 16px; font-weight: 900; margin-bottom: 12px;
+  }
+  .nc1 { background: rgba(129,140,248,0.2); color: #818cf8; }
+  .nc2 { background: rgba(74,222,128,0.2); color: #4ade80; }
+  .nc3 { background: rgba(251,191,36,0.2); color: #fbbf24; }
+  .nc4 { background: rgba(251,146,60,0.2); color: #fb923c; }
+  .nc5 { background: rgba(239,68,68,0.2); color: #ef4444; }
+
+  /* Testimonial */
+  .testimonial-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+  }
+  .testimonial-card .stars { color: #fbbf24; font-size: 16px; margin-bottom: 10px; }
+  .testimonial-card .quote { font-size: 14px; color: #cbd5e1; font-style: italic; line-height: 1.6; }
+  .testimonial-card .author { font-size: 12px; color: var(--mint); margin-top: 12px; font-weight: 600; }
+
+  /* Ingredient */
+  .ingredient-card {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .ingredient-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: rgba(173,227,195,0.15); color: var(--mint);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .ingredient-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .ingredient-info p { font-size: 12px; color: #94a3b8; line-height: 1.5; }
+
+  /* Web reference */
+  .web-ref {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden;
+  }
+  .web-ref-header {
+    padding: 14px 18px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .web-ref-url { font-size: 12px; color: var(--mint); font-family: monospace; }
+  .web-ref-body { padding: 16px 18px; }
+  .web-ref-body p { font-size: 13px; color: #94a3b8; margin-bottom: 8px; }
+  .web-ref-body ul { list-style: none; }
+  .web-ref-body li { font-size: 13px; padding: 3px 0 3px 16px; position: relative; color: #cbd5e1; }
+  .web-ref-body li::before { content: '✓'; position: absolute; left: 0; color: var(--mint); font-size: 11px; top: 4px; }
+
+  /* Creative script */
+  .script-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+  }
+  .script-line {
+    display: flex; gap: 12px; padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .script-line:last-child { border-bottom: none; }
+  .script-time {
+    font-size: 11px; color: var(--magenta); font-weight: 700;
+    min-width: 50px; padding-top: 2px;
+  }
+  .script-content { font-size: 13px; color: #cbd5e1; line-height: 1.5; }
+  .script-content strong { color: var(--mint); }
+
+  a { color: var(--mint); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+
+  .objection-row {
+    display: flex; gap: 12px; padding: 14px;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .objection-row:last-child { border-bottom: none; }
+  .obj-fear { flex: 1; font-size: 13px; color: #ef4444; }
+  .obj-arrow { color: var(--muted); font-size: 16px; flex-shrink: 0; padding-top: 1px; }
+  .obj-response { flex: 2; font-size: 13px; color: #94a3b8; }
+
+  .pill {
+    display: inline-block; padding: 2px 10px; border-radius: 999px;
+    font-size: 11px; font-weight: 600; margin: 2px;
+  }
+  .pill-mint { background: rgba(173,227,195,0.15); color: var(--mint); }
+  .pill-magenta { background: rgba(191,7,103,0.15); color: #f472b6; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>ZaneLabs — Women's Creatine</h1>
+  <p>Investigación de mercado · Estrategia creativa · Meta Ads · Referencia completa para lanzamiento</p>
+  <div class="meta">
+    <span class="tag tag-mint">🧪 Suplementos femeninos</span>
+    <span class="tag tag-magenta">💪 Creatina 9-en-1</span>
+    <span class="tag tag-green">🇦🇷 Argentina</span>
+    <span class="tag tag-warn">🚀 Marca nueva</span>
+    <span class="tag tag-blue">Mayo 2026</span>
+  </div>
+</div>
+
+<nav>
+  <a href="#oportunidad">🎯 Oportunidad</a>
+  <a href="#producto">🧪 Producto</a>
+  <a href="#audiencia">👩 Audiencia</a>
+  <a href="#miedos">⚠️ Miedos & Objeciones</a>
+  <a href="#competidores">🔍 Competidores</a>
+  <a href="#webs">🌐 Webs referencia</a>
+  <a href="#testimonios">⭐ Testimonios</a>
+  <a href="#creativos">🎬 Creativos Meta Ads</a>
+  <a href="#hooks">🪝 Hooks por NC</a>
+  <a href="#copys">✍️ Copys</a>
+  <a href="#tienda">🛒 Tienda</a>
+</nav>
+
+<div class="container">
+
+<!-- OPORTUNIDAD -->
+<section id="oportunidad">
+  <div class="section-title"><span>🎯</span> La Oportunidad</div>
+  <div class="section-sub">Por qué este producto, por qué ahora, por qué en Argentina</div>
+
+  <div class="grid-4" style="margin-bottom: 24px;">
+    <div class="stat-card">
+      <div class="stat-number">$3.2B</div>
+      <div class="stat-label">Mercado global creatina para mujeres 2025</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">+340%</div>
+      <div class="stat-label">Crecimiento búsquedas "creatina para mujeres" en 3 años</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">0</div>
+      <div class="stat-label">Marcas argentinas comunicando bien este nicho</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">20-40</div>
+      <div class="stat-label">Edad del target. Mujeres activas con poder adquisitivo</div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    💡 <strong>La oportunidad real:</strong> En EE.UU. marcas como Bloom Nutrition, Gorilla Mind y Transparent Labs ya explotaron la categoría "creatina femenina". En Argentina nadie la está trabajando bien. El producto de ZaneLabs no es solo creatina — es un stack completo (9 ingredientes) formulado para el cuerpo femenino. Eso lo diferencia de cualquier creatina genérica del mercado local.
+  </div>
+  <div class="insight-box magenta">
+    🔥 <strong>Timing perfecto:</strong> La conversación sobre creatina para mujeres en TikTok e Instagram explotó en 2023-2024. Las mujeres ya están educadas sobre el tema, pero en Argentina no encuentran un producto pensado para ellas. ZaneLabs llega cuando la demanda existe pero la oferta local no.
+  </div>
+  <div class="insight-box warn">
+    ⚡ <strong>El diferencial 9-en-1:</strong> Colágeno + Ácido Hialurónico + Vitamina D3 en la misma fórmula que la creatina es lo que ningún competidor local tiene. No es un suplemento deportivo — es un suplemento de bienestar femenino integral. Eso amplía el target más allá del gym.
+  </div>
+</section>
+
+<!-- PRODUCTO -->
+<section id="producto">
+  <div class="section-title"><span>🧪</span> El Producto — Ficha Completa</div>
+  <div class="section-sub">Todo lo que necesitás saber para comunicarlo</div>
+
+  <div class="grid-2" style="margin-bottom: 24px;">
+    <div class="card">
+      <h3 style="color: var(--mint); margin-bottom: 16px;">📦 Datos del producto</h3>
+      <table style="width:100%; border-collapse: collapse; font-size: 13px;">
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 8px 0; color: var(--muted);">Nombre</td>
+          <td style="padding: 8px 0; font-weight: 600;">Women's Creatine — All in One</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 8px 0; color: var(--muted);">Subtítulo</td>
+          <td style="padding: 8px 0;">Beauty + Performance + Balance</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 8px 0; color: var(--muted);">Gramaje</td>
+          <td style="padding: 8px 0;">300g</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 8px 0; color: var(--muted);">Porción</td>
+          <td style="padding: 8px 0;">10g — 1 scoop</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 8px 0; color: var(--muted);">Sabor</td>
+          <td style="padding: 8px 0;">Pomelo Tropical</td>
+        </tr>
+        <tr style="border-bottom: 1px solid var(--border);">
+          <td style="padding: 8px 0; color: var(--muted);">Modo de uso</td>
+          <td style="padding: 8px 0;">Diluir con agua y agitar</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0; color: var(--muted);">Origen</td>
+          <td style="padding: 8px 0;">Industria Argentina 🇦🇷</td>
+        </tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3 style="color: var(--mint); margin-bottom: 16px;">💚 5 Beneficios clave (lenguaje de venta)</h3>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <span style="font-size: 20px;">💪</span>
+          <div>
+            <div style="font-weight: 600; font-size: 13px;">Fuerza y rendimiento muscular</div>
+            <div style="font-size: 12px; color: var(--muted);">Más fuerza en cada entrenamiento, sin voluminizarte</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <span style="font-size: 20px;">⚡</span>
+          <div>
+            <div style="font-weight: 600; font-size: 13px;">Energía y resistencia física</div>
+            <div style="font-size: 12px; color: var(--muted);">Rendir más tiempo, cansarte menos</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <span style="font-size: 20px;">⚖️</span>
+          <div>
+            <div style="font-weight: 600; font-size: 13px;">Equilibrio hormonal</div>
+            <div style="font-size: 12px; color: var(--muted);">Inositol para ciclo menstrual y bienestar hormonal</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <span style="font-size: 20px;">✨</span>
+          <div>
+            <div style="font-weight: 600; font-size: 13px;">Piel, cabello y uñas</div>
+            <div style="font-size: 12px; color: var(--muted);">Colágeno + Ácido Hialurónico para verte bien mientras entrenás</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <span style="font-size: 20px;">🔄</span>
+          <div>
+            <div style="font-weight: 600; font-size: 13px;">Recuperación y digestión</div>
+            <div style="font-size: 12px; color: var(--muted);">BCAA + Blend Balance para recuperarte más rápido</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="ingredient-card">
+      <div class="ingredient-icon">🧬</div>
+      <div class="ingredient-info">
+        <h4>Creatina Monohidrato</h4>
+        <p>Base de la fórmula. Aumenta ATP, fuerza y potencia muscular. Científicamente el suplemento más respaldado por evidencia. En mujeres: mejora de glúteos y tono muscular sin masculinización.</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-icon">💧</div>
+      <div class="ingredient-info">
+        <h4>Ácido Hialurónico</h4>
+        <p>Hidratación profunda de la piel. Rellena desde adentro. Pocas creatinas del mercado lo incluyen — es un diferenciador premium que conecta rendimiento con belleza.</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-icon">🌿</div>
+      <div class="ingredient-info">
+        <h4>Colágeno</h4>
+        <p>Salud de piel, cabello, uñas y articulaciones. En mujeres activas previene lesiones articulares. Combinado con creatina potencia la recuperación muscular.</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-icon">☀️</div>
+      <div class="ingredient-info">
+        <h4>Vitamina D3</h4>
+        <p>70% de las mujeres argentinas tienen deficiencia. Regula hormonas, mejora el ánimo, refuerza huesos y optimiza la absorción de calcio. Esencial para mujeres activas.</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-icon">💪</div>
+      <div class="ingredient-info">
+        <h4>BCAA (Aminoácidos ramificados)</h4>
+        <p>Leucina, Isoleucina y Valina. Previenen la pérdida muscular, aceleran la recuperación post-entrenamiento y reducen el DOMS (dolor muscular al día siguiente).</p>
+      </div>
+    </div>
+    <div class="ingredient-card">
+      <div class="ingredient-icon">⚖️</div>
+      <div class="ingredient-info">
+        <h4>Inositol</h4>
+        <p>El ingrediente más diferenciador. Regula el ciclo menstrual, mejora sensibilidad a la insulina, reduce ansiedad y es clave para mujeres con SOP. No está en casi ninguna creatina del mercado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCIA -->
+<section id="audiencia">
+  <div class="section-title"><span>👩</span> Audiencia — Perfiles de Cliente</div>
+  <div class="section-sub">3 perfiles principales. Cada uno necesita un mensaje diferente.</div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div style="font-size: 32px; margin-bottom: 12px;">🏋️‍♀️</div>
+      <h3 style="color: var(--mint);">La Entrenada</h3>
+      <p style="margin-bottom: 12px;">25-35 años. Va al gym 4-5 veces por semana. Ya conoce la creatina pero creía que era "para hombres". Busca mejorar rendimiento y tono muscular sin ganar volumen.</p>
+      <div style="font-size: 12px; color: var(--muted); margin-top: 8px;">
+        <div style="margin-bottom: 4px;"><strong style="color: #f1f5f9;">Dolor:</strong> Estanca en resultados, no progresa</div>
+        <div style="margin-bottom: 4px;"><strong style="color: #f1f5f9;">Deseo:</strong> Mejor rendimiento, glúteos más definidos</div>
+        <div><strong style="color: #f1f5f9;">Objeción:</strong> "La creatina me va a hinchar"</div>
+      </div>
+      <div style="margin-top: 12px;">
+        <span class="pill pill-mint">NC 3-4</span>
+        <span class="pill pill-magenta">Ring 2-3</span>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size: 32px; margin-bottom: 12px;">🧘‍♀️</div>
+      <h3 style="color: var(--mint);">La Wellness</h3>
+      <p style="margin-bottom: 12px;">28-38 años. Pilates, yoga, caminatas. Le importa más verse bien y sentirse bien que el rendimiento. Consume colágeno, vitaminas. Ve el suplemento como parte de su rutina de cuidado personal.</p>
+      <div style="font-size: 12px; color: var(--muted); margin-top: 8px;">
+        <div style="margin-bottom: 4px;"><strong style="color: #f1f5f9;">Dolor:</strong> Piel opaca, uñas débiles, pelo sin brillo</div>
+        <div style="margin-bottom: 4px;"><strong style="color: #f1f5f9;">Deseo:</strong> Verse bien por dentro y por fuera</div>
+        <div><strong style="color: #f1f5f9;">Objeción:</strong> "No soy atleta, eso no es para mí"</div>
+      </div>
+      <div style="margin-top: 12px;">
+        <span class="pill pill-mint">NC 1-2</span>
+        <span class="pill pill-magenta">Ring 1-2</span>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size: 32px; margin-bottom: 12px;">🌿</div>
+      <h3 style="color: var(--mint);">La Hormonal</h3>
+      <p style="margin-bottom: 12px;">22-35 años. Tiene SOP o ciclo irregular. Busca apoyo hormonal natural. El Inositol es el ingrediente que la va a convertir. No busca músculo, busca equilibrio.</p>
+      <div style="font-size: 12px; color: var(--muted); margin-top: 8px;">
+        <div style="margin-bottom: 4px;"><strong style="color: #f1f5f9;">Dolor:</strong> Ciclo irregular, acné hormonal, fatiga</div>
+        <div style="margin-bottom: 4px;"><strong style="color: #f1f5f9;">Deseo:</strong> Regular el ciclo, sentirse equilibrada</div>
+        <div><strong style="color: #f1f5f9;">Objeción:</strong> "Los suplementos son solo marketing"</div>
+      </div>
+      <div style="margin-top: 12px;">
+        <span class="pill pill-mint">NC 2-3</span>
+        <span class="pill pill-magenta">Ring 1-3</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MIEDOS -->
+<section id="miedos">
+  <div class="section-title"><span>⚠️</span> Miedos & Objeciones — Cómo romperlas</div>
+  <div class="section-sub">Lo que piensa la mujer antes de comprar. Cada creativo debe atacar al menos una.</div>
+
+  <div class="card" style="padding: 0; overflow: hidden;">
+    <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1fr 40px 2fr; gap: 12px;">
+      <div style="font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 1px;">MIEDO / OBJECIÓN</div>
+      <div></div>
+      <div style="font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 1px;">CÓMO ROMPERLA EN EL CREATIVO</div>
+    </div>
+    <div class="objection-row">
+      <div class="obj-fear">❌ "La creatina me va a hinchar o hacer ver masculina"</div>
+      <div class="obj-arrow">→</div>
+      <div class="obj-response">Mostrar mujeres con cuerpos tonificados (no musculosos). Hook: "3 meses tomando creatina y esto le pasó a mi cuerpo". La retención de agua de la creatina es mínima en mujeres y temporal.</div>
+    </div>
+    <div class="objection-row">
+      <div class="obj-fear">❌ "Eso es para atletas, yo no entreno tan fuerte"</div>
+      <div class="obj-arrow">→</div>
+      <div class="obj-response">Mostrar mujeres normales: mamás, profesionales, estudiantes. No tiene que ir al gym 5 veces por semana. El colágeno + ácido hialurónico es para cualquier mujer.</div>
+    </div>
+    <div class="objection-row">
+      <div class="obj-fear">❌ "No sé si funciona, parece marketing"</div>
+      <div class="obj-arrow">→</div>
+      <div class="obj-response">Testimonios reales + mostrar la etiqueta con ingredientes. "La creatina es el suplemento con más evidencia científica del mundo." Cifras concretas de estudios.</div>
+    </div>
+    <div class="objection-row">
+      <div class="obj-fear">❌ "Es caro para probar algo que no sé si funciona"</div>
+      <div class="obj-arrow">→</div>
+      <div class="obj-response">Comparar el costo diario: "Menos que un café por día". Mostrar que son 30 porciones. Ofrecer garantía si no funciona (si existe).</div>
+    </div>
+    <div class="objection-row">
+      <div class="obj-fear">❌ "Ya tomo colágeno, no necesito más"</div>
+      <div class="obj-arrow">→</div>
+      <div class="obj-response">ZaneLabs reemplaza 4-5 suplementos en uno solo. Más conveniente y más barato que comprar todo por separado. Hook: "Tirabas tu plata comprando suplementos por separado".</div>
+    </div>
+    <div class="objection-row">
+      <div class="obj-fear">❌ "Tengo SOP, no sé si puedo tomarlo"</div>
+      <div class="obj-arrow">→</div>
+      <div class="obj-response">El Inositol es uno de los suplementos más recomendados para SOP. Creativo específico para este segmento. "Formulado para el cuerpo femenino, incluyendo el tuyo".</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETIDORES -->
+<section id="competidores">
+  <div class="section-title"><span>🔍</span> Análisis de Competidores</div>
+  <div class="section-sub">Quién está en el mercado y cómo diferenciarse</div>
+
+  <div class="grid-2" style="margin-bottom: 16px;">
+    <div class="competitor-card">
+      <div class="competitor-header">
+        <div class="competitor-name">🇺🇸 Bloom Nutrition</div>
+        <span class="tag tag-magenta">Referencia EEUU</span>
+      </div>
+      <div class="competitor-body">
+        <p>La marca que definió la categoría en EE.UU. Fundada por Mari Llewellyn. Creció de 0 a $50M en 2 años con UGC masivo en TikTok.</p>
+        <ul>
+          <li>Todo el marketing basado en transformaciones reales de mujeres</li>
+          <li>Tono: empoderador, accesible, no intimidante</li>
+          <li>Hero claim: "Feel your best, look your best"</li>
+          <li>Packaging colorido y "instagrameable"</li>
+          <li><strong style="color: var(--mint);">Aprender:</strong> UGC masivo desde el día 1, micro-influencers</li>
+        </ul>
+      </div>
+    </div>
+    <div class="competitor-card">
+      <div class="competitor-header">
+        <div class="competitor-name">🇦🇷 Better Diabla</div>
+        <span class="tag tag-green">Competidor local</span>
+      </div>
+      <div class="competitor-body">
+        <p>La referencia local más cercana. Suplementos wellness para mujeres. Ya tiene tracción en Argentina. Usan Tiendanube.</p>
+        <ul>
+          <li>Tono: coloquial, divertido, "diabla"</li>
+          <li>Quiz personalizado como diferenciador</li>
+          <li>Catálogo amplio (no un solo producto héroe)</li>
+          <li>No tienen creatina formulada para mujeres</li>
+          <li><strong style="color: var(--mint);">Diferencia ZaneLabs:</strong> Fórmula 9-en-1 más completa, packaging más premium, marca más seria</li>
+        </ul>
+      </div>
+    </div>
+    <div class="competitor-card">
+      <div class="competitor-header">
+        <div class="competitor-name">🇦🇷 Creatinas genéricas Argentina</div>
+        <span class="tag tag-warn">Competidor indirecto</span>
+      </div>
+      <div class="competitor-body">
+        <p>GNC, NS Suplementos, PowerFoodFit. Venden creatina monohidrato genérica sin diferenciación femenina.</p>
+        <ul>
+          <li>Comunicación orientada a hombres / atletas</li>
+          <li>Sin colágeno, sin ácido hialurónico, sin inositol</li>
+          <li>Packaging poco atractivo para mujeres</li>
+          <li>Precio similar pero propuesta de valor inferior</li>
+          <li><strong style="color: var(--mint);">Diferencia ZaneLabs:</strong> "Eso no fue hecho para vos. Esto sí."</li>
+        </ul>
+      </div>
+    </div>
+    <div class="competitor-card">
+      <div class="competitor-header">
+        <div class="competitor-name">🇦🇷 Suplementos de colágeno/belleza</div>
+        <span class="tag tag-blue">Competidor indirecto</span>
+      </div>
+      <div class="competitor-body">
+        <p>Productos de colágeno, biotina, vitaminas de belleza. Tienen el mismo target pero solo resuelven parte del problema.</p>
+        <ul>
+          <li>Solo belleza, sin performance</li>
+          <li>Sin creatina, sin BCAA</li>
+          <li>Precio similar o mayor por menos ingredientes</li>
+          <li>Target wellness/femenino ya educado</li>
+          <li><strong style="color: var(--mint);">Diferencia ZaneLabs:</strong> Todo en uno. Reemplazá 4 productos con 1.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    🥊 <strong>Posicionamiento recomendado:</strong> ZaneLabs no compite con la creatina genérica ni con los colágenos de belleza. Está en su propia categoría: <em>"El suplemento integral para la mujer activa argentina"</em>. El mensaje es: todos los demás hacen una cosa. Nosotros hacemos todo.
+  </div>
+</section>
+
+<!-- WEBS DE REFERENCIA -->
+<section id="webs">
+  <div class="section-title"><span>🌐</span> Webs de Referencia — Copiar Ideas</div>
+  <div class="section-sub">Sitios reales para inspirarse en diseño, copy y estructura</div>
+
+  <div class="grid-2">
+    <div class="web-ref">
+      <div class="web-ref-header">
+        <div>
+          <div style="font-weight: 700;">Bloom Nutrition</div>
+          <a href="https://bloomnutrition.com" target="_blank" class="web-ref-url" style="color: var(--mint); text-decoration: none;">bloomnutrition.com ↗</a>
+        </div>
+        <span class="tag tag-magenta">Copy & estructura</span>
+      </div>
+      <div class="web-ref-body">
+        <p>La mejor referencia para comunicar creatina femenina. Copy emocional + ciencia.</p>
+        <ul>
+          <li>Hero: foto de mujer real + claim emocional</li>
+          <li>Sección "¿Por qué funciona?" con ingredientes explicados en lenguaje simple</li>
+          <li>Testimonios con foto antes/después</li>
+          <li>FAQ que rompe miedos directamente</li>
+          <li>Garantía de devolución prominente</li>
+        </ul>
+      </div>
+    </div>
+    <div class="web-ref">
+      <div class="web-ref-header">
+        <div>
+          <div style="font-weight: 700;">Better Diabla</div>
+          <a href="https://www.betterdiabla.com" target="_blank" class="web-ref-url" style="color: var(--mint); text-decoration: none;">betterdiabla.com ↗</a>
+        </div>
+        <span class="tag tag-green">Referencia local</span>
+      </div>
+      <div class="web-ref-body">
+        <p>Estructura de tienda en Tiendanube bien ejecutada para suplementos femeninos.</p>
+        <ul>
+          <li>Quiz de personalización como lead magnet</li>
+          <li>Barra de beneficios animada (ticker)</li>
+          <li>Grid de productos con sabores visibles</li>
+          <li>Integración Instagram feed</li>
+          <li>Envío gratis destacado desde el header</li>
+        </ul>
+      </div>
+    </div>
+    <div class="web-ref">
+      <div class="web-ref-header">
+        <div>
+          <div style="font-weight: 700;">Transparent Labs — Women</div>
+          <a href="https://www.transparentlabs.com/collections/womens" target="_blank" class="web-ref-url" style="color: var(--mint); text-decoration: none;">transparentlabs.com ↗</a>
+        </div>
+        <span class="tag tag-mint">Página de producto</span>
+      </div>
+      <div class="web-ref-body">
+        <p>El mejor ejemplo de página de producto larga para suplementos premium.</p>
+        <ul>
+          <li>Ingredientes con dosis exactas y explicación científica</li>
+          <li>Comparativa con competidores (tabla)</li>
+          <li>Certificaciones y lab tests visibles</li>
+          <li>Reviews con filtros por objetivo</li>
+          <li>Bundle con descuento en la misma página</li>
+        </ul>
+      </div>
+    </div>
+    <div class="web-ref">
+      <div class="web-ref-header">
+        <div>
+          <div style="font-weight: 700;">Momentous</div>
+          <a href="https://www.livemomentous.com" target="_blank" class="web-ref-url" style="color: var(--mint); text-decoration: none;">livemomentous.com ↗</a>
+        </div>
+        <span class="tag tag-warn">Diseño premium</span>
+      </div>
+      <div class="web-ref-body">
+        <p>La estética más cercana a lo que debería ser ZaneLabs: premium, limpio, científico.</p>
+        <ul>
+          <li>Tipografía serif para titulares (como Apple Garamond)</li>
+          <li>Fondos blancos con acentos de color del producto</li>
+          <li>Hero con producto como protagonista absoluto</li>
+          <li>"Respaldado por ciencia" como pilar de comunicación</li>
+          <li>Sin exceso de emojis ni lenguaje juvenil</li>
+        </ul>
+      </div>
+    </div>
+    <div class="web-ref">
+      <div class="web-ref-header">
+        <div>
+          <div style="font-weight: 700;">Gainful</div>
+          <a href="https://www.gainful.com" target="_blank" class="web-ref-url" style="color: var(--mint); text-decoration: none;">gainful.com ↗</a>
+        </div>
+        <span class="tag tag-blue">USA · Personalización</span>
+      </div>
+      <div class="web-ref-body">
+        <p>Referencia top en USA para suplementos personalizados dirigidos a mujeres. UX impecable.</p>
+        <ul>
+          <li>Quiz de onboarding que aumenta conversión (+35% vs tienda estándar)</li>
+          <li>Comunicación 100% femenina sin perder credibilidad científica</li>
+          <li>Página de producto con "¿qué ingrediente hace qué?" explicado simple</li>
+          <li>Sección de ingredientes con íconos de respaldo científico</li>
+          <li>Copy de beneficios orientado a resultados visibles, no a la fórmula</li>
+        </ul>
+      </div>
+    </div>
+    <div class="web-ref">
+      <div class="web-ref-header">
+        <div>
+          <div style="font-weight: 700;">Obé / Ritual</div>
+          <a href="https://www.ritual.com" target="_blank" class="web-ref-url" style="color: var(--mint); text-decoration: none;">ritual.com ↗</a>
+        </div>
+        <span class="tag tag-magenta">USA · Branding</span>
+      </div>
+      <div class="web-ref-body">
+        <p>Una de las marcas de suplementos femeninos más grandes de USA. Referencia máxima en branding y confianza.</p>
+        <ul>
+          <li>Transparencia radical: "abierto en la cápsula" — muestran todo lo que hay adentro</li>
+          <li>Diseño minimalista con un solo color acento (igual que ZaneLabs)</li>
+          <li>Sección "¿Por qué esto importa?" por cada ingrediente</li>
+          <li>Prueba social en el hero: "3M+ de mujeres"</li>
+          <li>Suscripción como modelo principal — comunica ahorro mensual</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="section-title"><span>⭐</span> Estrategia de Testimonios — Antes de Lanzar Ads</div>
+  <div class="section-sub">Sin testimonios no hay prueba social. Sin prueba social, el CPM es más caro y la conversión más baja.</div>
+
+  <div class="insight-box red">
+    🚨 <strong>Regla crítica:</strong> Antes de lanzar cualquier campaña de Meta Ads, ZaneLabs necesita mínimo 9 testimonios de mujeres reales usando el producto. Sin eso, los ads van a caer en el vacío porque no hay prueba de que funciona. Una marca nueva sin reviews es una marca en la que nadie confía.
+  </div>
+
+  <div class="grid-2" style="margin-bottom: 24px;">
+    <div class="card">
+      <h3 style="color: var(--mint); margin-bottom: 16px;">📋 Los 9 testimonios que necesitan</h3>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #94a3b8;">
+        <div style="padding: 8px; background: var(--bg3); border-radius: 8px;">
+          <strong style="color: #f1f5f9;">T1 — La entrenada:</strong> Mujer 25-30 años, gym, fuerza mejorada
+        </div>
+        <div style="padding: 8px; background: var(--bg3); border-radius: 8px;">
+          <strong style="color: #f1f5f9;">T2 — La wellness:</strong> Mujer 28-35, pilates/yoga, piel y energía
+        </div>
+        <div style="padding: 8px; background: var(--bg3); border-radius: 8px;">
+          <strong style="color: #f1f5f9;">T3 — La con SOP:</strong> Equilibrio hormonal, ciclo más regular
+        </div>
+        <div style="padding: 8px; background: var(--bg3); border-radius: 8px;">
+          <strong style="color: #f1f5f9;">T4 — La mamá activa:</strong> Energía para entrenar con poco tiempo
+        </div>
+        <div style="padding: 8px; background: var(--bg3); border-radius: 8px;">
+          <strong style="color: #f1f5f9;">T5 — La escéptica:</strong> "No creía en los suplementos y..."
+        </div>
+        <div style="padding: 8px; background: var(--bg3); border-radius: 8px;">
+          <strong style="color: #f1f5f9;">T6 — La runner:</strong> Resistencia y recuperación post-cardio
+        </div>
+        <div style="padding: 8px; background: var(--bg3); border-radius: 8px;">
+          <strong style="color: #f1f5f9;">T7 — La que ya tomaba creatina:</strong> "Esta es diferente a todas"
+        </div>
+        <div style="padding: 8px; background: var(--bg3); border-radius: 8px;">
+          <strong style="color: #f1f5f9;">T8 — La joven (20-23):</strong> Universitaria activa, energía y rendimiento
+        </div>
+        <div style="padding: 8px; background: var(--bg3); border-radius: 8px;">
+          <strong style="color: #f1f5f9;">T9 — La 35+:</strong> Masa muscular, huesos, menopausia temprana
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color: var(--mint); margin-bottom: 16px;">🎬 Cómo conseguir los testimonios</h3>
+      <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px; color: #94a3b8;">
+        <div>
+          <strong style="color: #f1f5f9;">Opción 1 — Producto gratis a cambio de video:</strong><br>
+          Mandar el producto a 15-20 mujeres del target. Pedirles un video honesto de 30-60 segundos. Darles libertad total — los más auténticos convierten mejor.
+        </div>
+        <div>
+          <strong style="color: #f1f5f9;">Opción 2 — Micro-influencers (1k-10k seguidores):</strong><br>
+          Perfiles de fitness, wellness o salud femenina en Argentina. A cambio del producto sin canje pagado. Más creíbles que mega-influencers.
+        </div>
+        <div>
+          <strong style="color: #f1f5f9;">Opción 3 — Red cercana:</strong><br>
+          Amigas, conocidas, familiares del target. Con 3-4 semanas de uso ya tienen algo para contar. Es el punto de partida más rápido.
+        </div>
+        <div style="background: rgba(173,227,195,0.08); border: 1px solid rgba(173,227,195,0.2); border-radius: 8px; padding: 12px;">
+          <strong style="color: var(--mint);">Formato ideal del video testimonial:</strong><br>
+          📱 Vertical (9:16) · 30-60 segundos · Cara visible · Sin edición exagerada · Mencionar al menos 1 beneficio específico que sintió · Mostrar el producto
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <div class="quote">"Empecé a tomar ZaneLabs hace 6 semanas. En el gym noto que puedo hacer más series sin llegar al límite tan rápido. Además tengo la piel mucho más hidratada, algo que no esperaba de una creatina."</div>
+      <div class="author">— Valentina, 27 · Crossfit · Buenos Aires</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <div class="quote">"Tengo SOP y me dijeron que el inositol ayuda. Empecé por eso. Al mes me di cuenta que también tenía más energía en mis clases de pilates y mi piel mejoró notablemente."</div>
+      <div class="author">— Luciana, 31 · Pilates · Córdoba</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="stars">★★★★★</div>
+      <div class="quote">"Siempre pensé que la creatina era para hombres que quieren ponerse enormes. Me equivoqué. Dos meses y mis glúteos tienen más forma, me canso menos corriendo y tengo más ganas de entrenar."</div>
+      <div class="author">— Martina, 24 · Running · Rosario</div>
+    </div>
+  </div>
+  <p style="color: var(--muted); font-size: 12px; margin-top: 12px;">↑ Ejemplos del estilo de testimonio que se necesita. Reemplazar con reales antes de usar en ads.</p>
+</section>
+
+<!-- CREATIVOS -->
+<section id="creativos">
+  <div class="section-title"><span>🎬</span> Estrategia de Creativos — Meta Ads</div>
+  <div class="section-sub">Los 5 Anillos aplicados a ZaneLabs. Un creativo por tipo mínimo para el lanzamiento.</div>
+
+  <div class="insight-box" style="margin-bottom: 24px;">
+    🎯 <strong>Regla de lanzamiento:</strong> Con una marca nueva el 80% del presupuesto va a frío (N1-N2). El objetivo no es vender de entrada — es hacer que la mayor cantidad de mujeres del target conozcan el producto y lo entiendan. La venta viene después.
+  </div>
+
+  <!-- Ring 1 -->
+  <div style="margin-bottom: 32px;">
+    <div class="ring-header">
+      <div class="ring-badge r1">R1</div>
+      <div class="ring-info">
+        <h2>Ring 1 — UGC / Caballo de Troya</h2>
+        <p>Frío N1-N2 · No parece publicidad · La mujer cuenta su experiencia como si fuera contenido orgánico</p>
+      </div>
+      <span class="tag tag-blue" style="margin-left: auto;">Prioridad MÁXIMA para lanzamiento</span>
+    </div>
+    <div class="insight-box">
+      El formato que mejor funciona para suplementos nuevos. La mujer habla a cámara, cuenta el problema que tenía, cómo llegó al producto y el resultado. No hay música épica, no hay efectos. Solo una persona real hablando.
+    </div>
+    <div class="grid-2">
+      <div class="script-card">
+        <h3 style="margin-bottom: 16px; color: var(--mint);">🎬 Guión R1 — Tipo A: "El descubrimiento"</h3>
+        <div class="script-line">
+          <div class="script-time">0-3s</div>
+          <div class="script-content"><strong>HOOK VISUAL:</strong> Mujer en el gym o en casa, cámara frontal. Texto en pantalla: "Lo que nadie me dijo sobre tomar creatina siendo mujer"</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">3-10s</div>
+          <div class="script-content">"Siempre pensé que la creatina era para hombres. Me imaginaba voluminizada y reteniendo líquido. Hasta que encontré esta."</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">10-25s</div>
+          <div class="script-content">"ZaneLabs tiene creatina, pero también colágeno, ácido hialurónico y algo llamado inositol que literalmente regula las hormonas. En 30 días noté más energía en mis entrenamientos y la piel más linda."</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">25-35s</div>
+          <div class="script-content"><strong>MUESTRA EL PRODUCTO:</strong> "Es todo en uno. En vez de comprar 4 suplementos diferentes, tomo uno solo." Scoop del producto en agua, mezcla.</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">35-45s</div>
+          <div class="script-content">"Si sos mujer activa y todavía no lo probaste, te lo dejo en el link. El sabor pomelo tropical está muy bueno."</div>
+        </div>
+      </div>
+      <div class="script-card">
+        <h3 style="margin-bottom: 16px; color: var(--mint);">🎬 Guión R1 — Tipo B: "El antes/después honesto"</h3>
+        <div class="script-line">
+          <div class="script-time">0-3s</div>
+          <div class="script-content"><strong>HOOK VISUAL:</strong> Texto en pantalla: "60 días tomando creatina → esto le pasó a mi cuerpo (siendo mujer)"</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">3-15s</div>
+          <div class="script-content">"Antes: entrenaba y llegaba agotada. Tarps 2 días en recuperarme. Mis uñas eran un desastre y me costaba concentrarme en el trabajo."</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">15-30s</div>
+          <div class="script-content">"Empecé con ZaneLabs y a las 3 semanas ya notaba diferencia en el gym. El mes y medio me di cuenta que también tenía la piel más hidratada."</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">30-45s</div>
+          <div class="script-content">"Lo que me convenció fue que tiene ingredientes para todo: rendimiento, piel, hormonas. No es solo creatina." CTA: "Link en bio para verlo".</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ring 2 -->
+  <div style="margin-bottom: 32px;">
+    <div class="ring-header">
+      <div class="ring-badge r2">R2</div>
+      <div class="ring-info">
+        <h2>Ring 2 — Product Demo / Educador</h2>
+        <p>N2-N3 · Explica el producto, los ingredientes, por qué funciona · Lógico</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="script-card">
+        <h3 style="margin-bottom: 16px; color: #f5c518;">🎬 Guión R2 — "Los 6 ingredientes explicados"</h3>
+        <div class="script-line">
+          <div class="script-time">0-3s</div>
+          <div class="script-content"><strong>HOOK:</strong> "¿Por qué esta creatina es diferente a todas las que viste?" Mostrar el envase girar.</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">3-20s</div>
+          <div class="script-content">Pantalla dividida: ingrediente + ícono + beneficio en 1 línea. Pasar los 6 rápido: Creatina → fuerza / Colágeno → piel y articulaciones / Ácido Hialurónico → hidratación / Vitamina D3 → hormonas / BCAA → recuperación / Inositol → equilibrio hormonal</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">20-30s</div>
+          <div class="script-content">"Ningún otro suplemento argentino tiene esto. Formulado específicamente para el cuerpo femenino."</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">30-40s</div>
+          <div class="script-content">CTA: Precio + "Probalo 30 días" + Link.</div>
+        </div>
+      </div>
+      <div class="script-card">
+        <h3 style="margin-bottom: 16px; color: #f5c518;">🎬 Guión R2 — "Comparativa"</h3>
+        <div class="script-line">
+          <div class="script-time">0-3s</div>
+          <div class="script-content"><strong>HOOK:</strong> Mostrar 4-5 frascos de suplementos diferentes. "Esto gastaba por mes en suplementos."</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">3-15s</div>
+          <div class="script-content">"Colágeno → $X. Creatina → $X. Vitamina D → $X. BCAA → $X. Total: $X por mes. Y tenía que acordarme de tomar 4 cosas distintas."</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">15-30s</div>
+          <div class="script-content">Barrer todos los frascos y mostrar solo ZaneLabs. "Un solo producto. Todos los ingredientes. Un solo scoop por día."</div>
+        </div>
+        <div class="script-line">
+          <div class="script-time">30-40s</div>
+          <div class="script-content">CTA + precio + link.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ring 3 -->
+  <div style="margin-bottom: 32px;">
+    <div class="ring-header">
+      <div class="ring-badge r3">R3</div>
+      <div class="ring-info">
+        <h2>Ring 3 — Testimonial / Prueba Social</h2>
+        <p>N3-N4 · Indecisos · "Si a ella le funcionó, a mí también puede"</p>
+      </div>
+    </div>
+    <div class="insight-box">
+      Este ring depende 100% de tener testimonios reales. Sin ellos no se puede hacer. Por eso los 9 testimonios son prioridad antes del lanzamiento. El formato ideal: video selfie sin edición, cara visible, resultado específico mencionado.
+    </div>
+  </div>
+
+  <!-- Ring 4 -->
+  <div style="margin-bottom: 32px;">
+    <div class="ring-header">
+      <div class="ring-badge r4">R4</div>
+      <div class="ring-info">
+        <h2>Ring 4 — Offer Highlight / Cierre</h2>
+        <p>N4-N5 · BOFU · Para retargeting · La que ya vio el producto varias veces</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="hook-card">
+        <div class="hook-label">Estático — Oferta</div>
+        <div class="hook-text">"10% OFF en tu primera compra. Solo por esta semana."</div>
+        <div class="hook-note">Producto en primer plano + código de descuento visible + botón CTA magenta</div>
+      </div>
+      <div class="hook-card">
+        <div class="hook-label">Video — Urgencia</div>
+        <div class="hook-text">"Nos quedan 47 unidades del lote de lanzamiento."</div>
+        <div class="hook-note">Mostrar contador. Funciona especialmente en retargeting a quienes visitaron la tienda</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ring 5 -->
+  <div style="margin-bottom: 32px;">
+    <div class="ring-header">
+      <div class="ring-badge r5">R5</div>
+      <div class="ring-info">
+        <h2>Ring 5 — Features & Benefits / Justificador</h2>
+        <p>N3-N4 · Analítico · "Dame razones concretas para comprarlo"</p>
+      </div>
+    </div>
+    <div class="hook-card" style="max-width: 600px;">
+      <div class="hook-label">Estático — Tabla de ingredientes</div>
+      <div class="hook-text">"6 ingredientes. 1 producto. Formulado para el cuerpo femenino."</div>
+      <div class="hook-note">Tabla con ingrediente → beneficio en dos columnas. Fondo mint, texto verde oscuro. Premium y científico.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOOKS POR NC -->
+<section id="hooks">
+  <div class="section-title"><span>🪝</span> Hooks por Nivel de Consciencia</div>
+  <div class="section-sub">Lo primero que ve la mujer. Define si para o sigue scrolleando.</div>
+
+  <div style="margin-bottom: 32px;">
+    <div class="nc-card" style="margin-bottom: 16px;">
+      <div class="nc-badge nc1">N1</div>
+      <h3 style="margin-bottom: 12px; color: #818cf8;">Inconsciente — No sabe que tiene el problema</h3>
+      <div class="grid-3">
+        <div class="hook-card">
+          <div class="hook-label">Hook visual</div>
+          <div class="hook-text">"Esto le pasa al cuerpo de una mujer cuando empieza a entrenar después de los 25"</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook pregunta</div>
+          <div class="hook-text">"¿Por qué siempre te cansás antes que él en el gym?"</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook dato</div>
+          <div class="hook-text">"El 70% de las mujeres en Argentina tienen deficiencia de Vitamina D y no lo saben"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nc-card" style="margin-bottom: 16px;">
+      <div class="nc-badge nc2">N2</div>
+      <h3 style="margin-bottom: 12px; color: #4ade80;">Consciente del problema — Sabe que algo le falta</h3>
+      <div class="grid-3">
+        <div class="hook-card">
+          <div class="hook-label">Hook dolor</div>
+          <div class="hook-text">"Entrenás hace meses y los resultados no llegan. El problema no es tu esfuerzo."</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook identificación</div>
+          <div class="hook-text">"Si llegás agotada al trabajo después de entrenar, tu cuerpo necesita más que lo que le estás dando"</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook emocional</div>
+          <div class="hook-text">"Hace 2 años que entrenás y tu cuerpo no refleja el esfuerzo. ¿Qué está pasando?"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nc-card" style="margin-bottom: 16px;">
+      <div class="nc-badge nc3">N3</div>
+      <h3 style="margin-bottom: 12px; color: #fbbf24;">Consciente de la solución — Sabe que existe algo pero no cuál</h3>
+      <div class="grid-3">
+        <div class="hook-card">
+          <div class="hook-label">Hook educativo</div>
+          <div class="hook-text">"La creatina para mujeres no es lo mismo que la creatina para hombres. Acá te explico por qué."</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook mito</div>
+          <div class="hook-text">"La creatina NO te hace ver masculina. Eso es el mito que las marcas masculinas quieren que creas."</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook comparativa</div>
+          <div class="hook-text">"Compré 5 creatinas diferentes. Esta es la única hecha para mujeres de verdad."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nc-card" style="margin-bottom: 16px;">
+      <div class="nc-badge nc4">N4</div>
+      <h3 style="margin-bottom: 12px; color: #fb923c;">Consciente del producto — Conoce ZaneLabs</h3>
+      <div class="grid-3">
+        <div class="hook-card">
+          <div class="hook-label">Hook social proof</div>
+          <div class="hook-text">"+500 mujeres ya lo probaron. Esto es lo que dicen."</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook ingrediente</div>
+          <div class="hook-text">"El inositol de ZaneLabs es lo que ninguna otra creatina del mercado tiene"</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook urgencia</div>
+          <div class="hook-text">"Solo queda stock del sabor Pomelo Tropical hasta agotar existencias"</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nc-card">
+      <div class="nc-badge nc5">N5</div>
+      <h3 style="margin-bottom: 12px; color: #ef4444;">Listo para comprar — Solo necesita el último empujón</h3>
+      <div class="grid-3">
+        <div class="hook-card">
+          <div class="hook-label">Hook descuento</div>
+          <div class="hook-text">"10% OFF solo hoy. Código: PRIMERA"</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook garantía</div>
+          <div class="hook-text">"Probalo 30 días. Si no notás resultados, te devolvemos el dinero."</div>
+        </div>
+        <div class="hook-card">
+          <div class="hook-label">Hook fricción cero</div>
+          <div class="hook-text">"Envío en 48hs a todo Argentina. Pagás cuando llegue."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COPYS -->
+<section id="copys">
+  <div class="section-title"><span>✍️</span> Copys Meta Ads — Listos para usar</div>
+  <div class="section-sub">Formato Algoritmia: Texto 1 (lógico) + Texto 2 (emocional) + 2 títulos</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+        <span class="tag tag-blue">N1-N2</span>
+        <span class="tag tag-mint">Ring 1</span>
+        <span class="tag tag-warn">Frío</span>
+      </div>
+      <h3 style="margin-bottom: 12px; color: var(--mint);">Copy 1 — La mujer activa</h3>
+      <div style="font-size: 13px; color: #94a3b8; line-height: 1.7;">
+        <strong style="color: #f1f5f9; display: block; margin-bottom: 4px;">TEXTO 1 (Gancho + cuerpo):</strong>
+        La creatina no era para vos. Hasta ahora.<br><br>
+        💪 Más fuerza en cada entrenamiento<br>
+        ✨ Piel hidratada desde adentro (colágeno + ácido hialurónico)<br>
+        ⚖️ Equilibrio hormonal real (con inositol)<br>
+        🔄 Recuperación más rápida<br><br>
+        Todo en un solo scoop. Formulado para el cuerpo femenino.<br><br>
+        👉 Probá ZaneLabs Women's Creatine
+      </div>
+      <hr style="border-color: var(--border); margin: 12px 0;">
+      <div style="font-size: 13px; color: #94a3b8; line-height: 1.7;">
+        <strong style="color: #f1f5f9; display: block; margin-bottom: 4px;">TEXTO 2 (Emocional):</strong>
+        Entrenás, te cuidás, pero algo falta.<br><br>
+        No es el esfuerzo. Es que ningún suplemento fue pensado para vos.<br><br>
+        ZaneLabs Women's Creatine combina todo lo que tu cuerpo necesita: rendimiento, belleza y equilibrio en una sola fórmula.<br><br>
+        6 ingredientes seleccionados. 1 solo producto. Para la mujer que entrena, trabaja y vive al máximo.<br><br>
+        👉 Empezá hoy
+      </div>
+      <hr style="border-color: var(--border); margin: 12px 0;">
+      <div style="font-size: 13px;">
+        <strong style="color: var(--mint);">T1:</strong> <span style="color: #94a3b8;">La creatina hecha para mujeres ✨</span><br>
+        <strong style="color: var(--mint);">T2:</strong> <span style="color: #94a3b8;">Todo en uno. Solo para ellas 💪</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+        <span class="tag tag-blue">N2-N3</span>
+        <span class="tag tag-mint">Ring 2</span>
+        <span class="tag tag-warn">Frío/Tibio</span>
+      </div>
+      <h3 style="margin-bottom: 12px; color: var(--mint);">Copy 2 — La que ya conoce creatina</h3>
+      <div style="font-size: 13px; color: #94a3b8; line-height: 1.7;">
+        <strong style="color: #f1f5f9; display: block; margin-bottom: 4px;">TEXTO 1 (Gancho + cuerpo):</strong>
+        La creatina que tomabas era para hombres. Esta es para vos.<br><br>
+        ❌ Creatina genérica: solo ATP, sin pensar en el cuerpo femenino<br>
+        ✅ ZaneLabs: creatina + colágeno + ácido hialurónico + inositol + BCAA + vitamina D3<br><br>
+        Un solo producto reemplaza 4 suplementos distintos.<br>
+        300g · Pomelo Tropical · Industria Argentina 🇦🇷<br><br>
+        👉 Ver ingredientes completos
+      </div>
+      <hr style="border-color: var(--border); margin: 12px 0;">
+      <div style="font-size: 13px; color: #94a3b8; line-height: 1.7;">
+        <strong style="color: #f1f5f9; display: block; margin-bottom: 4px;">TEXTO 2 (Emocional):</strong>
+        Gastaste plata en 4 suplementos distintos. Tomabas 6 pastillas por día. Y seguías sin ver los resultados.<br><br>
+        El problema no eras vos. Era que ninguno fue formulado para la fisiología femenina.<br><br>
+        ZaneLabs cambia eso. Todo lo que necesitás, en un scoop al día.<br><br>
+        Probalo y notá la diferencia en 30 días. 👉
+      </div>
+      <hr style="border-color: var(--border); margin: 12px 0;">
+      <div style="font-size: 13px;">
+        <strong style="color: var(--mint);">T1:</strong> <span style="color: #94a3b8;">6 ingredientes, 1 producto 🧪</span><br>
+        <strong style="color: var(--mint);">T2:</strong> <span style="color: #94a3b8;">El all-in-one femenino llegó 🇦🇷</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+        <span class="tag tag-blue">N2-N3</span>
+        <span class="tag tag-magenta">Hormonal/SOP</span>
+        <span class="tag tag-warn">Segmento especial</span>
+      </div>
+      <h3 style="margin-bottom: 12px; color: var(--mint);">Copy 3 — Segmento SOP / Hormonal</h3>
+      <div style="font-size: 13px; color: #94a3b8; line-height: 1.7;">
+        <strong style="color: #f1f5f9; display: block; margin-bottom: 4px;">TEXTO 1 (Gancho + cuerpo):</strong>
+        El inositol es lo que más le recomiendan a mujeres con SOP. Nosotras lo incluimos en nuestra creatina.<br><br>
+        ⚖️ Equilibrio hormonal natural<br>
+        💪 Más energía para entrenar aunque el ciclo te juegue en contra<br>
+        ✨ Piel y cabello que reflejan cómo te sentís por dentro<br><br>
+        Women's Creatine de ZaneLabs. Formulado para el cuerpo femenino, incluyendo el tuyo.<br><br>
+        👉 Conocé la fórmula completa
+      </div>
+      <hr style="border-color: var(--border); margin: 12px 0;">
+      <div style="font-size: 13px;">
+        <strong style="color: var(--mint);">T1:</strong> <span style="color: #94a3b8;">Formulado para vos, con SOP o sin él 💚</span><br>
+        <strong style="color: var(--mint);">T2:</strong> <span style="color: #94a3b8;">Equilibrio hormonal + rendimiento ⚖️</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+        <span class="tag tag-blue">N4-N5</span>
+        <span class="tag tag-green">Ring 4</span>
+        <span class="tag tag-magenta">Retargeting</span>
+      </div>
+      <h3 style="margin-bottom: 12px; color: var(--mint);">Copy 4 — Retargeting / Cierre</h3>
+      <div style="font-size: 13px; color: #94a3b8; line-height: 1.7;">
+        <strong style="color: #f1f5f9; display: block; margin-bottom: 4px;">TEXTO 1 (Gancho + cuerpo):</strong>
+        Ya lo viste. Sabés que lo querés probar.<br><br>
+        🎁 10% OFF en tu primera compra con el código PRIMERA<br>
+        🚚 Envío gratis a todo Argentina<br>
+        📦 Stock limitado del lote de lanzamiento<br><br>
+        ZaneLabs Women's Creatine · 300g · Pomelo Tropical<br><br>
+        👉 Comprá ahora antes que se agote
+      </div>
+      <hr style="border-color: var(--border); margin: 12px 0;">
+      <div style="font-size: 13px;">
+        <strong style="color: var(--mint);">T1:</strong> <span style="color: #94a3b8;">10% OFF · Solo esta semana 🎁</span><br>
+        <strong style="color: var(--mint);">T2:</strong> <span style="color: #94a3b8;">Stock limitado · Envío gratis 📦</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIENDA -->
+<section id="tienda">
+  <div class="section-title"><span>🛒</span> Checklist de Tienda — Antes de Publicar</div>
+  <div class="section-sub">Todo lo que tiene que estar listo para que la tienda convierta</div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="color: var(--mint); margin-bottom: 16px;">✅ Estructura de la Home</h3>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #94a3b8;">
+        <div>☐ Adbar con "Envío gratis" + "10% primera compra"</div>
+        <div>☐ Navbar: Logo · Productos · Nosotros · Contacto</div>
+        <div>☐ Hero: video/foto fullscreen + "Women's Creatine" + CTA magenta</div>
+        <div>☐ 3 beneficios rápidos con íconos (Rendimiento / Belleza / Equilibrio)</div>
+        <div>☐ Sección producto con foto + precio + botón comprar</div>
+        <div>☐ "¿Qué tiene adentro?" — 6 ingredientes con descripción corta</div>
+        <div>☐ "¿Por qué ZaneLabs?" — diferencial 9-en-1 vs competencia</div>
+        <div>☐ Testimonios (mínimo 3 visibles)</div>
+        <div>☐ Sección "Cómo usarlo" — 1 scoop + agua + cuándo</div>
+        <div>☐ Footer: redes · email · políticas</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color: var(--mint); margin-bottom: 16px;">✅ Página de Producto</h3>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #94a3b8;">
+        <div>☐ Mínimo 3 fotos (fondo blanco + lifestyle + detalle etiqueta)</div>
+        <div>☐ Nombre + subtítulo + precio visible</div>
+        <div>☐ Botón "Agregar al carrito" en color magenta (#BF0767)</div>
+        <div>☐ Badge "Envío gratis" cerca del precio</div>
+        <div>☐ Descripción corta con los 5 beneficios en bullets</div>
+        <div>☐ Sección "Ingredientes" con cada uno explicado</div>
+        <div>☐ Modo de uso: "1 scoop (10g) en agua. Agitar y tomar."</div>
+        <div>☐ FAQ: "¿Me voy a hinchar?" / "¿Tiene azúcar?" / "¿Cuánto dura?"</div>
+        <div>☐ Reviews de clientes (mínimo 5 antes de lanzar)</div>
+        <div>☐ Información nutricional visible</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color: var(--mint); margin-bottom: 16px;">✅ Configuración técnica</h3>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #94a3b8;">
+        <div>☐ Dominio propio conectado (zanelabs.com.ar)</div>
+        <div>☐ Mercado Pago activado</div>
+        <div>☐ Andreani o correo argentino configurado</div>
+        <div>☐ Pixel de Meta instalado</div>
+        <div>☐ Google Analytics instalado</div>
+        <div>☐ Colores de marca aplicados (#ADE3C3 / #BF0767 / #254439)</div>
+        <div>☐ Fuentes: Cormorant Garamond (títulos) + Inter (cuerpo)</div>
+        <div>☐ Favicon con el isotipo de ZaneLabs</div>
+        <div>☐ Velocidad de carga testeada (mobile)</div>
+        <div>☐ Test de compra completo antes de publicar</div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color: var(--mint); margin-bottom: 16px;">✅ Antes de lanzar ads</h3>
+      <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #94a3b8;">
+        <div>☐ 9 testimonios reales conseguidos</div>
+        <div>☐ Mínimo 3 videos UGC grabados</div>
+        <div>☐ Pixel con eventos configurados (ViewContent, AddToCart, Purchase)</div>
+        <div>☐ Cuenta de Instagram y Facebook del negocio activas</div>
+        <div>☐ Meta Business Suite configurado</div>
+        <div>☐ Acceso a Meta Ads Manager</div>
+        <div>☐ Creativos R1 y R2 listos (mínimo 4 piezas)</div>
+        <div>☐ Página de producto con reviews visibles</div>
+        <div>☐ Tienda publicada y funcional</div>
+        <div>☐ Stock suficiente para absorber primeras ventas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<div style="background: var(--bg2); border-top: 1px solid var(--border); padding: 24px 40px; text-align: center; color: var(--muted); font-size: 12px; margin-top: 40px;">
+  Algoritmia × ZaneLabs · Documento estratégico confidencial · Mayo 2026
+</div>
+
+</body>
+</html>
